@@ -1,17 +1,37 @@
 const db = require("../models")
 const router = require("express").Router()
-const { Post, User, Comment } = db
+const { Post, User, Comment, Community } = db
 
 // CREATE A POST
 router.post("/", async (req, res) => {
-    if (req.currentUser) {
-        await Post.create({
-            ...req.body,
-            user_id: req.session.user_id
-        })
-        res.json({ message: "Post created" })
-    } else {
-        res.json({ message: "You must be logged in to create a post" })
+    try {
+        if (req.currentUser) {
+            const community = await Community.findOne({
+                where: {
+                    community_name: req.body.community_name
+                }
+            })
+            if (community) {
+                await Post.create({
+                    ...req.body,
+                    community_id: community.community_id,
+                    user_id: req.session.user_id
+                })
+                res.json({ message: "Post created" })
+            } else {
+                const newCommunity = await Community.create({ community_name: req.body.community_name })
+                await Post.create({
+                    ...req.body,
+                    community_id: newCommunity.community_id,
+                    user_id: req.session.user_id
+                })
+                res.json({ message: "Post and community created" })
+            }
+        } else {
+            res.json({ message: "You must be logged in to create a post" })
+        }
+    } catch (err) {
+        res.status(404).json(err)
     }
 })
 
