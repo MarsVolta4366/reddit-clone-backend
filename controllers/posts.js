@@ -76,7 +76,7 @@ router.get("/:username", async (req, res) => {
                 user_id: userId.user_id
             },
             order: [['updatedAt', 'DESC']],
-            include: { model: User, attributes: ['username'] }
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
         })
         res.status(200).json(usersPosts)
     } catch (err) {
