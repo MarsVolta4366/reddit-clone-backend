@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
         const posts = await Post.findAll({
             limit: 20,
             order: [['updatedAt', 'DESC']],
-            include: { model: User, attributes: ['username'] }
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
         })
         res.json(posts)
     } catch (err) {
