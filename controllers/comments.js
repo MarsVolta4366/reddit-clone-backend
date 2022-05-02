@@ -20,21 +20,14 @@ router.post("/", async (req, res) => {
 
 router.delete("/", async (req, res) => {
     try {
-        if (req.currentUser) {
-            const commentToDelete = await Comment.findOne({
-                where: {
-                    comment_id: req.body.comment_id,
-                    user_id: req.body.user_id
-                }
-            })
-
-            if (req.session.user_id === commentToDelete.user_id) {
-                await commentToDelete.destroy()
-                res.json({ message: "Comment deleted" })
+        const commentToDelete = await Comment.findOne({
+            where: {
+                comment_id: req.body.comment_id,
+                user_id: req.session.user_id
             }
-        } else {
-            res.json({ message: "Comment not found" })
-        }
+        })
+        await commentToDelete.destroy()
+        res.json({ message: "Comment deleted" })
     } catch (err) {
         res.status(404).json(err)
     }
