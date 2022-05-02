@@ -64,11 +64,16 @@ router.get("/currentUser", async (req, res) => {
 })
 
 // Get all posts from a community by community_id
-router.get("/community/:community_id", async (req, res) => {
+router.get("/community/:community_name", async (req, res) => {
     try {
+        const foundCommunity = await Community.findOne({
+            where: {
+                community_name: req.params.community_name
+            }
+        })
         const communityPosts = await Post.findAll({
             where: {
-                community_id: req.params.community_id
+                community_id: foundCommunity.community_id
             },
             order: [['updatedAt', 'DESC']],
             include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name', 'community_id'] }]
