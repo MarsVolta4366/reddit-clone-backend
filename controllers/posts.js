@@ -126,19 +126,15 @@ router.delete("/:postId", async (req, res) => {
 // Edit post route
 router.put("/", async (req, res) => {
     try {
-        if (req.session.user_id) {
-            await Post.update(
-                { text: req.body.text },
-                {
-                    where: {
-                        post_id: req.body.post_id,
-                        user_id: req.session.user_id
-                    },
-                })
-            res.json({ message: "Post updated" })
-        } else {
-            res.json({ message: "Post not found" })
-        }
+        await Post.update(
+            { text: req.body.text },
+            {
+                where: {
+                    post_id: req.body.post_id,
+                    user_id: req.session.user_id
+                },
+            })
+        res.json({ message: "Post updated" })
     } catch (err) {
         res.status(404).json(err)
     }
