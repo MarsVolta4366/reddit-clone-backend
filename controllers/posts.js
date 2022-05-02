@@ -76,7 +76,7 @@ router.get("/community/:community_name", async (req, res) => {
                 community_id: foundCommunity.community_id
             },
             order: [['updatedAt', 'DESC']],
-            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name', 'createdAt'] }]
         })
         res.json(communityPosts)
     } catch (err) {
@@ -90,7 +90,7 @@ router.get("/comments/:postId", async (req, res) => {
             where: {
                 post_id: req.params.postId
             },
-            include: [{ model: User, attributes: ['username'] }, { model: Comment, include: [{ model: User, attributes: ['username'] }] }, { model: Community, attributes: ['community_name'] }],
+            include: [{ model: User, attributes: ['username'] }, { model: Comment, include: [{ model: User, attributes: ['username'] }] }, { model: Community, attributes: ['community_name', 'createdAt'] }],
             order: [[Comment, 'updatedAt', 'DESC']]
         })
 
