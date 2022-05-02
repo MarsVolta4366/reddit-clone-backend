@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
         const posts = await Post.findAll({
             limit: 20,
             order: [['updatedAt', 'DESC']],
-            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name', 'community_id'] }]
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
         })
         res.json(posts)
     } catch (err) {
@@ -76,7 +76,7 @@ router.get("/community/:community_name", async (req, res) => {
                 community_id: foundCommunity.community_id
             },
             order: [['updatedAt', 'DESC']],
-            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name', 'community_id'] }]
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
         })
         res.json(communityPosts)
     } catch (err) {
@@ -90,7 +90,7 @@ router.get("/comments/:postId", async (req, res) => {
             where: {
                 post_id: req.params.postId
             },
-            include: [{ model: User, attributes: ['username'] }, { model: Comment, include: [{ model: User, attributes: ['username'] }] }, { model: Community, attributes: ['community_name', 'community_id'] }],
+            include: [{ model: User, attributes: ['username'] }, { model: Comment, include: [{ model: User, attributes: ['username'] }] }, { model: Community, attributes: ['community_name'] }],
             order: [[Comment, 'updatedAt', 'DESC']]
         })
 
@@ -113,7 +113,7 @@ router.get("/:username", async (req, res) => {
                 user_id: userId.user_id
             },
             order: [['updatedAt', 'DESC']],
-            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name', 'community_id'] }]
+            include: [{ model: User, attributes: ['username'] }, { model: Community, attributes: ['community_name'] }]
         })
         res.status(200).json(usersPosts)
     } catch (err) {
