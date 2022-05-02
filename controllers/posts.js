@@ -70,7 +70,7 @@ router.get("/community/:community_name", async (req, res) => {
     }
 })
 
-// Get post with comments by postId for post show page
+// Get post with comments and community data by postId for post show page
 router.get("/comments/:postId", async (req, res) => {
     try {
         const foundPost = await Post.findOne({
