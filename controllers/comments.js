@@ -35,20 +35,16 @@ router.delete("/", async (req, res) => {
 
 router.put("/", async (req, res) => {
     try {
-        if (req.currentUser) {
-            await Comment.update(
-                { text: req.body.text },
-                {
-                    where: {
-                        comment_id: req.body.comment_id,
-                        user_id: req.session.user_id
-                    }
+        await Comment.update(
+            { text: req.body.text },
+            {
+                where: {
+                    comment_id: req.body.comment_id,
+                    user_id: req.session.user_id
                 }
-            )
-            res.json({ message: "Comment updated" })
-        } else {
-            res.json({ message: "Comment not found" })
-        }
+            }
+        )
+        res.json({ message: "Comment updated" })
     } catch (err) {
         res.status(404).json(err)
     }
