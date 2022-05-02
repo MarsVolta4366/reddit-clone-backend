@@ -2,6 +2,7 @@ const db = require("../models")
 const router = require("express").Router()
 const { Comment } = db
 
+// Create comment
 router.post("/", async (req, res) => {
     try {
         if (req.currentUser) {
@@ -18,6 +19,7 @@ router.post("/", async (req, res) => {
     }
 })
 
+// Delete comment
 router.delete("/", async (req, res) => {
     try {
         const commentToDelete = await Comment.findOne({
@@ -33,6 +35,7 @@ router.delete("/", async (req, res) => {
     }
 })
 
+// Edit comment
 router.put("/", async (req, res) => {
     try {
         await Comment.update(
