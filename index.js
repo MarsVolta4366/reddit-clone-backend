@@ -6,6 +6,7 @@ require("dotenv").config()
 const cookieSession = require("cookie-session")
 const defineCurrentUser = require("./middleware/defineCurrentUser")
 
+// Was using below instead of bodyparser and urlencoded when running locally
 // app.use(express.json())
 
 app.use(bodyParser.json())
@@ -16,9 +17,9 @@ const port = process.env.PORT || 4000
 app.use(cookieSession({
     name: "session",
     keys: [process.env.SESSION_SECRET],
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    secure: true,
-    sameSite: "none"
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    // secure: true,
+    // sameSite: "none"
 }))
 
 // app.use((req, res, next) => {
