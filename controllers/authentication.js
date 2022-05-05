@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
 // GET USER PROFILE
 router.get("/profile", async (req, res) => {
-    req.currentUser ? res.json(req.currentUser) : res.json(null)
+    req.currentUser ? res.json(req.currentUser) : res.json({ message: "No current user" })
 })
 
 // LOGOUT
