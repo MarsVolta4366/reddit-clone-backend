@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const cors = require("cors")
+// const cors = require("cors")
 require("dotenv").config()
 const cookieSession = require("cookie-session")
 const defineCurrentUser = require("./middleware/defineCurrentUser")
@@ -22,10 +22,10 @@ app.use((req, res, next) => {
 });
 
 // Set up cors again once working on heroku
-app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
-}))
+// app.use(cors({
+//     origin: "http://localhost:3000",
+//     credentials: true
+// }))
 
 app.use(defineCurrentUser)
 
