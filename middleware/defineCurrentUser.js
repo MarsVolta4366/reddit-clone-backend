@@ -10,7 +10,6 @@ const defineCurrentUser = async (req, res, next) => {
             }
         })
         req.currentUser = user
-        req.session.save()
         next()
     } catch {
         next()
