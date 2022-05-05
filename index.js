@@ -13,7 +13,7 @@ app.use(cookieSession({
     keys: [process.env.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     // secure: true,
-    // sameSite: 'none'
+    sameSite: Strict
 }))
 
 // app.use((req, res, next) => {
