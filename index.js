@@ -16,10 +16,10 @@ app.use(cookieSession({
     sameSite: 'none'
 }))
 
-// app.use((req, res, next) => {
-//     req["sessionCookies"].secure = true;
-//     next();
-// });
+app.use((req, res, next) => {
+    req["sessionCookies"].secure = true;
+    next();
+});
 
 // Set up cors again once working on heroku
 app.use(cors({
