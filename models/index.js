@@ -15,6 +15,8 @@ let sequelize;
 //   sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
+// To run migrations in heroku postgres: heroku run npx sequelize-cli db:migrate
+// Used this article to deploy backend: https://anjelicaa.medium.com/deploying-a-node-js-postgres-sequelize-app-to-heroku-da3dc9de07cd
 // Found below code to connect to Heroku postgres at: https://stackoverflow.com/questions/27687546/cant-connect-to-heroku-postgresql-database-from-local-node-app-with-sequelize
 sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
