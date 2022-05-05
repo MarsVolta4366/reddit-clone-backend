@@ -24,7 +24,7 @@ app.use(cookieSession({
 }))
 
 app.use((req, res, next) => {
-    req["session"].secure = true;
+    req["session"].secure = false;
     next();
 });
 
