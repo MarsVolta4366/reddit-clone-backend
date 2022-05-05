@@ -1,11 +1,16 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const bodyParser = require("body-parser")
 require("dotenv").config()
 const cookieSession = require("cookie-session")
 const defineCurrentUser = require("./middleware/defineCurrentUser")
 
-app.use(express.json())
+// app.use(express.json())
+
+app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }))
+
 const port = process.env.PORT || 4000
 
 app.use(cookieSession({
@@ -13,7 +18,7 @@ app.use(cookieSession({
     keys: [process.env.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     // secure: true,
-    sameSite: "strict"
+    // sameSite: "strict"
 }))
 
 // app.use((req, res, next) => {
