@@ -18,19 +18,20 @@ app.use(cookieSession({
     name: "session",
     keys: [process.env.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    // secure: true,
-    // sameSite: "none"
-    sameSite: "strict"
+    secure: true,
+    sameSite: "none"
+    // sameSite: "strict"
 }))
 
-app.use((req, res, next) => {
-    req["session"].secure = false;
-    next();
-});
+// app.use((req, res, next) => {
+//     req["session"].secure = true;
+//     next();
+// });
 
 // Set up cors again once working on heroku
+// "http://localhost:3000"
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true,
 }))
 
