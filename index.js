@@ -20,9 +20,11 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     secure: true,
     sameSite: "none",
-    httpOnly: true
+    // httpOnly: true
     // sameSite: "strict"
 }))
+
+app.set('trust proxy', 1)
 
 app.use((req, res, next) => {
     req["session"].secure = true;
