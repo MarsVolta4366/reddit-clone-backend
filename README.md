@@ -31,5 +31,7 @@ This website was built using React, Node, Express, Sequelize, Material UI, Luxon
 ## Bugs
 * Text opactiy styling is applied on all post items regardless of size
 * Create a post form is visible to non logged in users but doesn't actually submit posts unless logged in
+* Cookie session isn't working when using the site on mobile
+* When deleting a post, you're redirected to home page. Ideally, you should be redirected to last page visited
 ## Unfinished functionality
 I'd like to implement a feature where when creating a post, you can search for the community you want to post to. Right now the community submission is just a text box so it's difficult to tell if you're submitting to the correct community. I'd like to add the ability to submit a post with images and videos. I'd also like to make the search bar work.

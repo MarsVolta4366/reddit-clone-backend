@@ -6,9 +6,6 @@ require("dotenv").config()
 const cookieSession = require("cookie-session")
 const defineCurrentUser = require("./middleware/defineCurrentUser")
 
-// Was using below instead of bodyparser and urlencoded when running locally
-// app.use(express.json())
-
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -20,8 +17,6 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     secure: true,
     sameSite: "none",
-    // httpOnly: true
-    // sameSite: "strict"
 }))
 
 app.set('trust proxy', 1)
@@ -31,8 +26,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Set up cors again once working on heroku
-// "http://localhost:3000"
 app.use(cors({
     origin: true,
     credentials: true,
